@@ -1,20 +1,9 @@
-import discord
+from dotenv import load_dotenv
+from lib.client import client as client_discord
 import os
 
-client = discord.Client()
 
+if __name__ == '__main__':
+    load_dotenv()
 
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-
-client.run(os.getenv('TOKEN'))
+    client_discord.run(os.getenv('TOKEN'))
